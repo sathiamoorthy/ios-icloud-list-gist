@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3636FAE1499603F00076533 /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = D3636FAD1499603F00076533 /* List.m */; };
 		D3F2D52A1499575800902E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D5291499575800902E4B /* UIKit.framework */; };
 		D3F2D52C1499575800902E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D52B1499575800902E4B /* Foundation.framework */; };
 		D3F2D52E1499575800902E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D52D1499575800902E4B /* CoreGraphics.framework */; };
@@ -22,7 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D3F2D5251499575800902E4B /* ios-icloud-list-gist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-icloud-list-gist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3636FAC1499603F00076533 /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
+		D3636FAD1499603F00076533 /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
+		D3F2D5251499575800902E4B /* List Gist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "List Gist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F2D5291499575800902E4B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3F2D52B1499575800902E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D3F2D52D1499575800902E4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,7 +71,7 @@
 		D3F2D5261499575800902E4B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D3F2D5251499575800902E4B /* ios-icloud-list-gist.app */,
+				D3F2D5251499575800902E4B /* List Gist.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,6 +95,8 @@
 				D3F2D53C1499575800902E4B /* MasterViewController.m */,
 				D3F2D53E1499575800902E4B /* DetailViewController.h */,
 				D3F2D53F1499575800902E4B /* DetailViewController.m */,
+				D3636FAC1499603F00076533 /* List.h */,
+				D3636FAD1499603F00076533 /* List.m */,
 				D3F2D5411499575800902E4B /* MasterViewController_iPhone.xib */,
 				D3F2D5441499575800902E4B /* MasterViewController_iPad.xib */,
 				D3F2D5471499575800902E4B /* DetailViewController_iPhone.xib */,
@@ -129,7 +134,7 @@
 			);
 			name = "List Gist";
 			productName = "ios-icloud-list-gist";
-			productReference = D3F2D5251499575800902E4B /* ios-icloud-list-gist.app */;
+			productReference = D3F2D5251499575800902E4B /* List Gist.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -182,6 +187,7 @@
 				D3F2D53A1499575800902E4B /* AppDelegate.m in Sources */,
 				D3F2D53D1499575800902E4B /* MasterViewController.m in Sources */,
 				D3F2D5401499575800902E4B /* DetailViewController.m in Sources */,
+				D3636FAE1499603F00076533 /* List.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +325,7 @@
 				D3F2D5511499575800902E4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
