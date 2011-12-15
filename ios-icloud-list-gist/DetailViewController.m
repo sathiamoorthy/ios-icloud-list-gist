@@ -6,6 +6,7 @@
 //
 
 #import "DetailViewController.h"
+#import "List.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -15,6 +16,7 @@
 @implementation DetailViewController
 
 @synthesize detailItem = _detailItem;
+@synthesize textView = _textView;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
 
@@ -118,6 +120,25 @@
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+#pragma mark - List observing
+
+- (void)listContentsUpdated:(List *)list {
+    self.textView.text = list.text;
+}
+
+- (void)disableEditing:(List *)list {
+    self.textView.userInteractionEnabled = NO;
+}
+
+- (void)enableEditing:(List *)list {
+    self.textView.userInteractionEnabled = YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    ((List *)self.detailItem).text = textView.text;
+    [((List *)self.detailItem) updateChangeCount:UIDocumentChangeDone];
 }
 
 @end
