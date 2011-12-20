@@ -23,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D309422114A1265600E6A226 /* List Gist.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "List Gist.entitlements"; sourceTree = "<group>"; };
 		D3636FAC1499603F00076533 /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
 		D3636FAD1499603F00076533 /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
 		D3F2D5251499575800902E4B /* List Gist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "List Gist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +63,7 @@
 		D3F2D51A1499575800902E4B = {
 			isa = PBXGroup;
 			children = (
+				D309422114A1265600E6A226 /* List Gist.entitlements */,
 				D3F2D52F1499575800902E4B /* ios-icloud-list-gist */,
 				D3F2D5281499575800902E4B /* Frameworks */,
 				D3F2D5261499575800902E4B /* Products */,
@@ -287,9 +289,11 @@
 		D3F2D5501499575800902E4B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "List Gist.entitlements";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ios-icloud-list-gist/ios-icloud-list-gist-Prefix.pch";
 				INFOPLIST_FILE = "ios-icloud-list-gist/ios-icloud-list-gist-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -298,9 +302,11 @@
 		D3F2D5511499575800902E4B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "List Gist.entitlements";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ios-icloud-list-gist/ios-icloud-list-gist-Prefix.pch";
 				INFOPLIST_FILE = "ios-icloud-list-gist/ios-icloud-list-gist-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
