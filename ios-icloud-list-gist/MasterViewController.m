@@ -9,9 +9,13 @@
 
 #import "DetailViewController.h"
 
+#import "List.h"
+
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
+
+@synthesize ubiquityContainer = _ubiquityContainer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,7 +92,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (nil == self.ubiquityContainer) {
+        self.ubiquityContainer = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:nil];
+    }
+    if (nil == self.ubiquityContainer) {
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 // Customize the appearance of table view cells.
@@ -152,6 +163,8 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 	    if (!self.detailViewController) {
 	        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
+            NSURL *fileURL = [self.ubiquityContainer URLByAppendingPathComponent:@"List 1.txt" isDirectory:NO];
+            self.detailViewController.detailItem = [[List alloc] initWithFileURL:fileURL];
 	    }
         [self.navigationController pushViewController:self.detailViewController animated:YES];
     }
