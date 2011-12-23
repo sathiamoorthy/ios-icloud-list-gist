@@ -17,9 +17,9 @@ static NSString *SingletonFilename = @"List 1.txt";
 
 @synthesize detailViewController = _detailViewController;
 
-@synthesize localContainerPath = _localContainerPath;
-@synthesize localContainerURL = _localContainerURL;
-@synthesize ubiquityContainerURL = _ubiquityContainerURL;
+@synthesize localDocumentsPath = _localDocumentsPath;
+@synthesize localDocumentsURL = _localDocumentsURL;
+@synthesize ubiquitousDocumentsURL = _ubiquitousDocumentsURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -157,17 +157,17 @@ static NSString *SingletonFilename = @"List 1.txt";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // This is a whacky place to do some initialization, but it's when I finally really need it.
-    if (nil == self.localContainerPath) {
-        self.localContainerPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        self.localContainerURL = [NSURL fileURLWithPath:self.localContainerPath isDirectory:YES];
-        self.ubiquityContainerURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    if (nil == self.localDocumentsPath) {
+        self.localDocumentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        self.localDocumentsURL = [NSURL fileURLWithPath:self.localDocumentsPath isDirectory:YES];
+        self.ubiquitousDocumentsURL = [[[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil] URLByAppendingPathComponent:@"Documents" isDirectory:YES];
     }
-    NSString *localFilePath = [self.localContainerPath stringByAppendingPathComponent:SingletonFilename];
+    NSString *localFilePath = [self.localDocumentsPath stringByAppendingPathComponent:SingletonFilename];
 
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 	    if (!self.detailViewController) {
 	        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
-            NSURL *fileURL = [self.localContainerURL URLByAppendingPathComponent:SingletonFilename isDirectory:NO];
+            NSURL *fileURL = [self.localDocumentsURL URLByAppendingPathComponent:SingletonFilename isDirectory:NO];
             List *detailItem = [[List alloc] initWithFileURL:fileURL listDelegate:self.detailViewController];
             BOOL localFileExists = [[NSFileManager defaultManager] fileExistsAtPath:localFilePath];
             detailItem.listDelegate = self.detailViewController;

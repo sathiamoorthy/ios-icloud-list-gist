@@ -12,8 +12,8 @@
 @interface MasterViewController : UITableViewController
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
-@property (strong, nonatomic) NSString *localContainerPath;
-@property (strong, nonatomic) NSURL *localContainerURL;
-@property (strong, nonatomic) NSURL *ubiquityContainerURL;
+@property (strong, nonatomic) NSString *localDocumentsPath;
+@property (strong, nonatomic) NSURL *localDocumentsURL;
+@property (strong, nonatomic) NSURL *ubiquitousDocumentsURL;
 
 @end
