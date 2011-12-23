@@ -14,4 +14,6 @@
 @property (strong) NSString *text;
 @property (weak) DetailViewController *listDelegate;
 
+- (id)initWithFileURL:(NSURL *)url listDelegate:(id)listDelegate;
+
 @end

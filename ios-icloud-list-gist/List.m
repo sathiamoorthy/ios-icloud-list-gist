@@ -14,19 +14,28 @@
 @synthesize text = _text;
 @synthesize listDelegate = _listDelegate;
 
+- (id)initWithFileURL:(NSURL *)url listDelegate:(DetailViewController *)listDelegate {
+    self.listDelegate = listDelegate;
+    return [super initWithFileURL:url];
+}
+
 - (BOOL)loadFromContents:(id)contents ofType:(NSString *)typeName error:(NSError **)outError {
     if ([contents length] > 0) {
         self.text = [[NSString alloc] initWithData:contents encoding:NSUTF8StringEncoding];
     } else {
-        self.text = @"";
+        self.text = @"Wheaties";
     }
     
-    // [self.listDelegate contentsUpdated:self];
+    [self.listDelegate contentsUpdated:self];
     return TRUE;
 }
 
 - (id)contentsForType:(NSString *)typeName error:(NSError **)outError {
-    return [self.text dataUsingEncoding:NSUTF8StringEncoding];
+    if (self.text == nil) {
+        return [@"" dataUsingEncoding:NSUTF8StringEncoding];
+    } else {
+        return [self.text dataUsingEncoding:NSUTF8StringEncoding];
+    }
 }
 
 - (void)disableEditing {

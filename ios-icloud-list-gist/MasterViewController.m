@@ -11,17 +11,21 @@
 
 #import "List.h"
 
+static NSString *SingletonFilename = @"List 1.txt";
+
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
 
-@synthesize ubiquityContainer = _ubiquityContainer;
+@synthesize localContainerPath = _localContainerPath;
+@synthesize localContainerURL = _localContainerURL;
+@synthesize ubiquityContainerURL = _ubiquityContainerURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
+        self.title = NSLocalizedString(@"Lists", @"Lists");
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             self.clearsSelectionOnViewWillAppear = NO;
             self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
@@ -92,14 +96,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (nil == self.ubiquityContainer) {
-        self.ubiquityContainer = [[NSFileManager defaultManager]URLForUbiquityContainerIdentifier:nil];
-    }
-    if (nil == self.ubiquityContainer) {
-        return 0;
-    } else {
-        return 1;
-    }
+    return 1;
 }
 
 // Customize the appearance of table view cells.
@@ -114,9 +111,8 @@
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
     }
-
     // Configure the cell.
-    cell.textLabel.text = NSLocalizedString(@"Detail", @"Detail");
+    cell.textLabel.text = NSLocalizedString(SingletonFilename, SingletonFilename);
     return cell;
 }
 
@@ -160,11 +156,32 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // This is a whacky place to do some initialization, but it's when I finally really need it.
+    if (nil == self.localContainerPath) {
+        self.localContainerPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        self.localContainerURL = [NSURL fileURLWithPath:self.localContainerPath isDirectory:YES];
+        self.ubiquityContainerURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    }
+    NSString *localFilePath = [self.localContainerPath stringByAppendingPathComponent:SingletonFilename];
+
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 	    if (!self.detailViewController) {
 	        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
-            NSURL *fileURL = [self.ubiquityContainer URLByAppendingPathComponent:@"List 1.txt" isDirectory:NO];
-            self.detailViewController.detailItem = [[List alloc] initWithFileURL:fileURL];
+            NSURL *fileURL = [self.localContainerURL URLByAppendingPathComponent:SingletonFilename isDirectory:NO];
+            List *detailItem = [[List alloc] initWithFileURL:fileURL listDelegate:self.detailViewController];
+            BOOL localFileExists = [[NSFileManager defaultManager] fileExistsAtPath:localFilePath];
+            detailItem.listDelegate = self.detailViewController;
+            if (!localFileExists) {
+                [detailItem saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+                    if (success) self.detailViewController.textView.text = detailItem.text;
+                }];
+            } else {
+                [detailItem openWithCompletionHandler:^(BOOL success) {
+                    if (success) self.detailViewController.textView.text = detailItem.text;
+                }];
+            }
+            self.detailViewController.detailItem = detailItem;
+            
 	    }
         [self.navigationController pushViewController:self.detailViewController animated:YES];
     }

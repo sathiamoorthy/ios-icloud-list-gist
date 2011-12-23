@@ -124,7 +124,7 @@
 
 #pragma mark - List observing
 
-- (void)listContentsUpdated:(List *)list {
+- (void)contentsUpdated:(List *)list {
     self.textView.text = list.text;
 }
 
@@ -135,6 +135,8 @@
 - (void)enableEditing:(List *)list {
     self.textView.userInteractionEnabled = YES;
 }
+
+#pragma mark - Text View Delegate
 
 - (void)textViewDidChange:(UITextView *)textView {
     ((List *)self.detailItem).text = textView.text;
