@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D3636FAE1499603F00076533 /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = D3636FAD1499603F00076533 /* List.m */; };
 		D394C46A14B4C68300074EF3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D394C46914B4C68300074EF3 /* Settings.bundle */; };
+		D3A655FC14B4D03C002D57E9 /* ListsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A655FB14B4D03C002D57E9 /* ListsManager.m */; };
 		D3F2D52A1499575800902E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D5291499575800902E4B /* UIKit.framework */; };
 		D3F2D52C1499575800902E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D52B1499575800902E4B /* Foundation.framework */; };
 		D3F2D52E1499575800902E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D52D1499575800902E4B /* CoreGraphics.framework */; };
@@ -28,6 +29,8 @@
 		D3636FAC1499603F00076533 /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
 		D3636FAD1499603F00076533 /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
 		D394C46914B4C68300074EF3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D3A655FA14B4D03C002D57E9 /* ListsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsManager.h; sourceTree = "<group>"; };
+		D3A655FB14B4D03C002D57E9 /* ListsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsManager.m; sourceTree = "<group>"; };
 		D3F2D5251499575800902E4B /* List Gist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "List Gist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F2D5291499575800902E4B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3F2D52B1499575800902E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,6 +105,8 @@
 				D3F2D53F1499575800902E4B /* DetailViewController.m */,
 				D3636FAC1499603F00076533 /* List.h */,
 				D3636FAD1499603F00076533 /* List.m */,
+				D3A655FA14B4D03C002D57E9 /* ListsManager.h */,
+				D3A655FB14B4D03C002D57E9 /* ListsManager.m */,
 				D3F2D5411499575800902E4B /* MasterViewController_iPhone.xib */,
 				D3F2D5441499575800902E4B /* MasterViewController_iPad.xib */,
 				D3F2D5471499575800902E4B /* DetailViewController_iPhone.xib */,
@@ -194,6 +199,7 @@
 				D3F2D53D1499575800902E4B /* MasterViewController.m in Sources */,
 				D3F2D5401499575800902E4B /* DetailViewController.m in Sources */,
 				D3636FAE1499603F00076533 /* List.m in Sources */,
+				D3A655FC14B4D03C002D57E9 /* ListsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
