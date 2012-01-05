@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "List.h"
+
 @class List;
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, ListDelegate>

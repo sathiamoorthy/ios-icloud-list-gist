@@ -8,7 +8,7 @@
 			<key>DefaultValue</key>
 			<true/>
 			<key>Key</key>
-			<string>enabled_preference</string>
+			<string>UseICloud</string>
 			<key>Title</key>
 			<string>Store Lists in iCloud</string>
 			<key>Type</key>
