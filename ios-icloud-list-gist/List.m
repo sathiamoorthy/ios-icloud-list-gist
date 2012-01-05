@@ -7,7 +7,6 @@
 // http://developer.apple.com/library/ios/#documentation/DataManagement/Conceptual/DocumentBasedAppPGiOS/Introduction/Introduction.html
 
 #import "List.h"
-#import "DetailViewController.h"
 
 @implementation List
 

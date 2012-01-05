@@ -7,16 +7,23 @@
 
 #import <UIKit/UIKit.h>
 
-@class DetailViewController;
+@protocol ListDelegate;
 
 @interface List : UIDocument
 
 @property (nonatomic, strong) NSString *text;
-// THE FOLLOWING IS BOGUS (THAT THE LIST KNOWS ABOUT THE DETAILVIEWCONTROLLER API)
-// NEED TO CREATE A SEPARATE DELEGATE PROTOCOL
-@property (nonatomic, weak) DetailViewController *delegate;
+@property (nonatomic, weak) id <ListDelegate> delegate;
 
 - (id)initWithFileURL:(NSURL *)url;
 - (void)notifyDelegate;
+
+@end
+
+@protocol ListDelegate <NSObject>
+
+@required
+- (void)disableEditing:(List *)sender;
+- (void)enableEditing:(List *)sender;
+- (void)contentsUpdated:(List *)sender;
 
 @end
