@@ -10,6 +10,7 @@
 		D3636FAE1499603F00076533 /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = D3636FAD1499603F00076533 /* List.m */; };
 		D394C46A14B4C68300074EF3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D394C46914B4C68300074EF3 /* Settings.bundle */; };
 		D3A655FC14B4D03C002D57E9 /* ListsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A655FB14B4D03C002D57E9 /* ListsManager.m */; };
+		D3CBAADD14B6666B00D0BE34 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D3CBAADC14B6666B00D0BE34 /* README.md */; };
 		D3F2D52A1499575800902E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D5291499575800902E4B /* UIKit.framework */; };
 		D3F2D52C1499575800902E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D52B1499575800902E4B /* Foundation.framework */; };
 		D3F2D52E1499575800902E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F2D52D1499575800902E4B /* CoreGraphics.framework */; };
@@ -31,6 +32,7 @@
 		D394C46914B4C68300074EF3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3A655FA14B4D03C002D57E9 /* ListsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListsManager.h; sourceTree = "<group>"; };
 		D3A655FB14B4D03C002D57E9 /* ListsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListsManager.m; sourceTree = "<group>"; };
+		D3CBAADC14B6666B00D0BE34 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D3F2D5251499575800902E4B /* List Gist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "List Gist.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F2D5291499575800902E4B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D3F2D52B1499575800902E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -68,6 +70,7 @@
 		D3F2D51A1499575800902E4B = {
 			isa = PBXGroup;
 			children = (
+				D3CBAADC14B6666B00D0BE34 /* README.md */,
 				D394C46914B4C68300074EF3 /* Settings.bundle */,
 				D309422114A1265600E6A226 /* List Gist.entitlements */,
 				D3F2D52F1499575800902E4B /* ios-icloud-list-gist */,
@@ -184,6 +187,7 @@
 				D3F2D5491499575800902E4B /* DetailViewController_iPhone.xib in Resources */,
 				D3F2D54C1499575800902E4B /* DetailViewController_iPad.xib in Resources */,
 				D394C46A14B4C68300074EF3 /* Settings.bundle in Resources */,
+				D3CBAADD14B6666B00D0BE34 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
