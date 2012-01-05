@@ -19,5 +19,6 @@
 
 - (NSMutableArray *)scanForFileNames:(NSURL *)documentsURL;
 - (List *)documentForFilename:(NSString *)filename isSingular:(BOOL)isSingular;
+- (void)createSampleIfNeeded;
 
 @end

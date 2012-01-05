@@ -35,6 +35,13 @@ static NSString *SampleFilename = @"List 1.txt";
     return self;
 }
 
+- (void)createSampleIfNeeded {
+    if (0 == [self.singularDocuments count] && 0 == [self.ubiquityDocuments count]) {
+        [self documentForFilename:SampleFilename isSingular:YES];
+        [self.singularDocuments addObject:SampleFilename];
+    }
+}
+
 - (NSMutableArray *)scanForFileNames:(NSURL *)documentsURL {
     NSMutableArray *documents = [NSMutableArray array];
     NSError *error;
@@ -62,11 +69,15 @@ static NSString *SampleFilename = @"List 1.txt";
     BOOL localFileExists = [[NSFileManager defaultManager] fileExistsAtPath:localFilePath];
     if (!localFileExists) {
         [detailItem saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-            // if (success) self.detailViewController.textView.text = detailItem.text;
+            if (success) {
+                [detailItem notifyDelegate];
+            }
         }];
     } else {
         [detailItem openWithCompletionHandler:^(BOOL success) {
-            // if (success) self.detailViewController.textView.text = detailItem.text;
+            if (success) {
+                [detailItem notifyDelegate];
+            }
         }];
     }
     return detailItem;

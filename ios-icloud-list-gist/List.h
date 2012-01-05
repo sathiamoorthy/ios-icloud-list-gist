@@ -17,5 +17,6 @@
 @property (nonatomic, weak) DetailViewController *delegate;
 
 - (id)initWithFileURL:(NSURL *)url;
+- (void)notifyDelegate;
 
 @end

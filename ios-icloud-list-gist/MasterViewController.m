@@ -12,8 +12,6 @@
 #import "List.h"
 #import "ListsManager.h"
 
-static NSString *SampleFilename = @"List 1.txt";
-
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
@@ -29,6 +27,7 @@ static NSString *SampleFilename = @"List 1.txt";
             self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
         }
         self.listsManager = [[ListsManager alloc] init];
+        [self.listsManager createSampleIfNeeded];
     }
     return self;
 }
@@ -123,7 +122,9 @@ static NSString *SampleFilename = @"List 1.txt";
         }
     }
     // Configure the cell.
-    cell.textLabel.text = NSLocalizedString(SampleFilename, SampleFilename);
+    NSArray *documentNames = indexPath.section == 0 ? self.listsManager.singularDocuments : self.listsManager.ubiquityDocuments;
+    NSString *documentName = [documentNames objectAtIndex:indexPath.row];
+    cell.textLabel.text = NSLocalizedString(documentName, documentName);
     return cell;
 }
 
@@ -176,15 +177,17 @@ static NSString *SampleFilename = @"List 1.txt";
         self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
     }
     NSArray *documentURLs;
-    NSUInteger section = [indexPath indexAtPosition:0];
     // NSUInteger row = [indexPath indexAtPosition:1];
-    if (section == 0) {
+    if (indexPath.section == 0) {
         documentURLs = self.listsManager.singularDocuments;
     } else {
         documentURLs = self.listsManager.ubiquityDocuments;
     }
+    
+    NSURL *fileURL = [documentURLs objectAtIndex:indexPath.row];
+    NSString *documentName = [fileURL lastPathComponent];
 
-    List *detailItem = [self.listsManager documentForFilename:SampleFilename isSingular:(section == 0)];
+    List *detailItem = [self.listsManager documentForFilename:documentName isSingular:(indexPath.section == 0)];
 
     detailItem.delegate = self.detailViewController;
     self.detailViewController.detailItem = detailItem;

@@ -45,4 +45,8 @@
     [self.delegate enableEditing:self];
 }
 
+- (void)notifyDelegate {
+    [self.delegate contentsUpdated:self];
+}
+
 @end
