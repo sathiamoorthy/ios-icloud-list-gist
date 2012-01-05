@@ -27,7 +27,7 @@
             self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
         }
         self.listsManager = [[ListsManager alloc] init];
-        [self.listsManager createSampleIfNeeded];
+        [self.listsManager createSamplesIfNeeded];
     }
     return self;
 }
