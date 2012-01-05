@@ -12,10 +12,9 @@
 @implementation List
 
 @synthesize text = _text;
-@synthesize listDelegate = _listDelegate;
+@synthesize delegate = _delegate;
 
-- (id)initWithFileURL:(NSURL *)url listDelegate:(DetailViewController *)listDelegate {
-    self.listDelegate = listDelegate;
+- (id)initWithFileURL:(NSURL *)url {
     return [super initWithFileURL:url];
 }
 
@@ -26,7 +25,7 @@
         self.text = @"Wheaties";
     }
     
-    [self.listDelegate contentsUpdated:self];
+    [self.delegate contentsUpdated:self];
     return TRUE;
 }
 
@@ -39,11 +38,11 @@
 }
 
 - (void)disableEditing {
-    [self.listDelegate disableEditing:self];
+    [self.delegate disableEditing:self];
 }
 
 - (void)enableEditing {
-    [self.listDelegate enableEditing:self];
+    [self.delegate enableEditing:self];
 }
 
 @end

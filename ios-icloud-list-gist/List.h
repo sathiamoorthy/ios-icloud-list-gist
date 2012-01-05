@@ -11,9 +11,11 @@
 
 @interface List : UIDocument
 
-@property (strong) NSString *text;
-@property (weak) DetailViewController *listDelegate;
+@property (nonatomic, strong) NSString *text;
+// THE FOLLOWING IS BOGUS (THAT THE LIST KNOWS ABOUT THE DETAILVIEWCONTROLLER API)
+// NEED TO CREATE A SEPARATE DELEGATE PROTOCOL
+@property (nonatomic, weak) DetailViewController *delegate;
 
-- (id)initWithFileURL:(NSURL *)url listDelegate:(id)listDelegate;
+- (id)initWithFileURL:(NSURL *)url;
 
 @end

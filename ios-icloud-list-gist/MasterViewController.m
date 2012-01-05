@@ -10,16 +10,14 @@
 #import "DetailViewController.h"
 
 #import "List.h"
+#import "ListsManager.h"
 
-static NSString *SingletonFilename = @"List 1.txt";
+static NSString *SampleFilename = @"List 1.txt";
 
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
-
-@synthesize localDocumentsPath = _localDocumentsPath;
-@synthesize localDocumentsURL = _localDocumentsURL;
-@synthesize ubiquitousDocumentsURL = _ubiquitousDocumentsURL;
+@synthesize listsManager = _listsManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,10 +28,11 @@ static NSString *SingletonFilename = @"List 1.txt";
             self.clearsSelectionOnViewWillAppear = NO;
             self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
         }
+        self.listsManager = [[ListsManager alloc] init];
     }
     return self;
 }
-							
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -91,12 +90,24 @@ static NSString *SingletonFilename = @"List 1.txt";
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 0) {
+        return [self.listsManager.singularDocuments count];
+    } else {
+        return [self.listsManager.ubiquityDocuments count];
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return @"Local Files";
+    } else {
+        return @"Cloud Files";
+    }
 }
 
 // Customize the appearance of table view cells.
@@ -112,79 +123,72 @@ static NSString *SingletonFilename = @"List 1.txt";
         }
     }
     // Configure the cell.
-    cell.textLabel.text = NSLocalizedString(SingletonFilename, SingletonFilename);
+    cell.textLabel.text = NSLocalizedString(SampleFilename, SampleFilename);
     return cell;
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source.
+ [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+ }   
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // This is a whacky place to do some initialization, but it's when I finally really need it.
-    if (nil == self.localDocumentsPath) {
-        self.localDocumentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        self.localDocumentsURL = [NSURL fileURLWithPath:self.localDocumentsPath isDirectory:YES];
-        self.ubiquitousDocumentsURL = [[[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil] URLByAppendingPathComponent:@"Documents" isDirectory:YES];
+    // NO IPAD IMPLEMENTATION YET
+    if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPhone) return;
+    // THIS METHOD'S IMPLEMENTATION IS A MESS PRESENTLY
+    if (!self.detailViewController) {
+        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
     }
-    NSString *localFilePath = [self.localDocumentsPath stringByAppendingPathComponent:SingletonFilename];
+    NSArray *documentURLs;
+    NSUInteger section = [indexPath indexAtPosition:0];
+    // NSUInteger row = [indexPath indexAtPosition:1];
+    if (section == 0) {
+        documentURLs = self.listsManager.singularDocuments;
+    } else {
+        documentURLs = self.listsManager.ubiquityDocuments;
+    }
 
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-	    if (!self.detailViewController) {
-	        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController_iPhone" bundle:nil];
-            NSURL *fileURL = [self.localDocumentsURL URLByAppendingPathComponent:SingletonFilename isDirectory:NO];
-            List *detailItem = [[List alloc] initWithFileURL:fileURL listDelegate:self.detailViewController];
-            BOOL localFileExists = [[NSFileManager defaultManager] fileExistsAtPath:localFilePath];
-            detailItem.listDelegate = self.detailViewController;
-            if (!localFileExists) {
-                [detailItem saveToURL:fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
-                    if (success) self.detailViewController.textView.text = detailItem.text;
-                }];
-            } else {
-                [detailItem openWithCompletionHandler:^(BOOL success) {
-                    if (success) self.detailViewController.textView.text = detailItem.text;
-                }];
-            }
-            self.detailViewController.detailItem = detailItem;
-            
-	    }
-        [self.navigationController pushViewController:self.detailViewController animated:YES];
-    }
+    List *detailItem = [self.listsManager documentForFilename:SampleFilename isSingular:(section == 0)];
+
+    detailItem.delegate = self.detailViewController;
+    self.detailViewController.detailItem = detailItem;
+    [self.navigationController pushViewController:self.detailViewController animated:YES];
 }
 
 @end
